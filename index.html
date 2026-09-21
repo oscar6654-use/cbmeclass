@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>115-116學年度 學保課程表｜三軍總醫院教學部</title>
+<meta name="description" content="三軍總醫院 115-116學年度 UGY 學保課程輪值表——依日期查詢每堂課的科部、主題、教師與地點">
+<style>
+:root{
+  --navy:#12233F;
+  --navy-2:#1B3A5E;
+  --navy-ink:#0B1728;
+  --teal:#0C8C82;
+  --teal-dark:#086A62;
+  --teal-light:#E4F4F1;
+  --amber:#B4740E;
+  --amber-dark:#8A5A0B;
+  --amber-light:#FBF1DD;
+  --red:#B8463A;
+  --red-light:#FBEBE8;
+  --bg:#F6F4EF;
+  --surface:#FFFFFF;
+  --surface-2:#FBFAF7;
+  --border:#E4E0D5;
+  --border-strong:#D3CDBD;
+  --ink:#20293A;
+  --ink-soft:#3C4657;
+  --muted:#6B7688;
+  --muted-2:#96A0AF;
+  --radius-sm:8px;
+  --radius:14px;
+  --radius-lg:20px;
+  --shadow-sm:0 1px 2px rgba(18,35,63,0.06);
+  --shadow:0 4px 16px rgba(18,35,63,0.08);
+  --maxw:980px;
+  --font: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "Helvetica Neue", Arial, sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden;width:100%;}
+body{
+  margin:0;font-family:var(--font);background:var(--bg);color:var(--ink);
+  line-height:1.65;font-size:16px;overflow-x:hidden;width:100%;-webkit-font-smoothing:antialiased;
+}
+h1,h2{margin:0;font-weight:700;letter-spacing:0.01em;color:var(--navy-ink);}
+p{margin:0;}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
+
+/* ---------- 頁首 ---------- */
+.page-head{
+  background:linear-gradient(155deg,var(--navy) 0%, var(--navy-2) 55%, #234a72 100%);
+  color:#fff;padding:36px 0 30px;
+}
+.page-head .eyebrow{
+  display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.18);padding:5px 13px;border-radius:999px;
+  font-size:12.5px;font-weight:600;letter-spacing:0.03em;margin-bottom:14px;color:#DCEDEA;
+}
+.page-head h1{color:#fff;font-size:clamp(21px,3.2vw,28px);line-height:1.35;margin-bottom:10px;}
+.page-head p{color:#C9D5E5;font-size:14.5px;max-width:640px;line-height:1.7;}
+
+/* ---------- 主要內容 ---------- */
+main{padding:28px 0 60px;}
+.toolbar{
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+  margin-bottom:16px;
+}
+.filter-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{
+  padding:9px 15px;border-radius:999px;border:1px solid var(--border-strong);
+  background:var(--surface);color:var(--ink-soft);font-size:13.5px;font-weight:600;
+  transition:all .15s;min-height:40px;cursor:pointer;
+}
+.chip:hover{border-color:var(--teal);color:var(--teal-dark);}
+.chip.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+.search-wrap{position:relative;flex:1;min-width:220px;max-width:320px;}
+.search-wrap input{
+  width:100%;padding:10px 14px 10px 38px;border-radius:10px;border:1px solid var(--border-strong);
+  font-size:14px;background:var(--surface);color:var(--ink);min-height:40px;
+}
+.search-wrap input:focus{outline:2px solid var(--teal);outline-offset:1px;border-color:var(--teal);}
+.search-wrap .s-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--muted-2);}
+.result-count{font-size:13px;color:var(--muted);margin-bottom:16px;}
+
+/* ---------- 課表卡片 ---------- */
+.sched-day{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;box-shadow:var(--shadow-sm);}
+.sched-day-head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;margin-bottom:10px;}
+.sched-date{font-size:15.5px;font-weight:700;color:var(--navy-ink);}
+.sched-table{width:100%;border-collapse:collapse;font-size:13px;}
+.sched-table th,.sched-table td{border:1px solid var(--border);padding:7px 9px;text-align:left;vertical-align:top;}
+.sched-table th{background:var(--surface-2);color:var(--navy-ink);font-weight:700;font-size:12px;white-space:nowrap;}
+.sched-table td.sched-time{white-space:nowrap;font-weight:600;color:var(--ink-soft);}
+.sched-badge{display:inline-block;padding:1px 8px;border-radius:99px;font-size:11px;font-weight:700;margin-right:4px;}
+.sched-badge.med5{background:var(--teal-light);color:var(--teal-dark);}
+.sched-badge.med6{background:var(--amber-light);color:var(--amber-dark);}
+.sched-badge.all{background:var(--red-light);color:var(--red);}
+.sched-holiday td{color:var(--muted);font-style:italic;}
+.sched-empty{color:var(--muted);text-align:center;padding:24px 0;}
+
+/* ---------- 頁尾 ---------- */
+footer{border-top:1px solid var(--border);padding:22px 0;color:var(--muted);font-size:12.5px;line-height:1.8;}
+
+@media (max-width:600px){
+  .sched-table{font-size:12px;}
+  .sched-table th,.sched-table td{padding:6px 6px;}
+}
+@media print{
+  .page-head{background:#fff !important;color:#000 !important;}
+  .page-head .eyebrow{display:none;}
+  .page-head h1,.page-head p{color:#000 !important;}
+  .toolbar{display:none;}
+}
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <div class="container">
+    <span class="eyebrow">三軍總醫院教學部</span>
+    <h1>115-116學年度 學保課程表</h1>
+    <p>
+      整理自教學部「115-116學保課程輪值表」（2026/08/03 版），依日期列出每一堂學保時段的科部、主題、授課教師與地點。
+      預設只顯示醫五課程，可切換篩選或直接搜尋。如遇異動請以教學部最新公告為準。
+    </p>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <div class="toolbar">
+      <div class="filter-chips" id="scheduleChips"></div>
+      <div class="search-wrap">
+        <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="search" id="scheduleSearch" placeholder="搜尋日期、科部、主題、教師…" aria-label="搜尋課表">
+      </div>
+    </div>
+    <p class="result-count" id="scheduleResultCount"></p>
+    <div id="scheduleList"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    資料來源：三軍總醫院教學部「115-116學保課程輪值表」（2026/08/03 版）。如有課程異動，請以教學部最新公告為準。
+  </div>
+</footer>
+
+<script>
+/* ---------------- 完整學保課程輪值表（115-116學年度，依教學部提供之課表整理） ---------------- */
+var SCHEDULE = [
+  {date:'2026-08-06',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'教學部',topic:'CBME課程及評量方式說明',teacher:'教學部',duty:null},
+  {date:'2026-08-06',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'教學部',topic:'CBME說明',teacher:'教學部',duty:null},
+  {date:'2026-08-06',place:'第3演講廳',audience:'醫六',time:'15:00-16:00',unit:'心臟內科',topic:'心電圖與心臟功能檢查',teacher:'劉文正',duty:'文心'},
+  {date:'2026-08-06',place:'第3演講廳',audience:'醫六',time:'16:00-17:00',unit:'核子醫學部',topic:'核子醫學檢查',teacher:'高峻皓',duty:'文心'},
+  {date:'2026-08-13',place:'第3演講廳',audience:'醫六',time:'15:00-16:00',unit:'麻醉部',topic:'手術前評估與準備',teacher:'楊子賢',duty:'文心'},
+  {date:'2026-08-13',place:'第3演講廳',audience:'醫六',time:'16:00-17:00',unit:'創傷科',topic:'緊急創傷評估',teacher:'邱煜程',duty:'文心'},
+  {date:'2026-08-13',place:'第一演講廳',audience:'醫五',time:'14:00-15:00',unit:'大腸直腸外科',topic:'18. 直腸指診',teacher:'游鈞偉',duty:'申喬'},
+  {date:'2026-08-13',place:'第一演講廳',audience:'醫五',time:'15:00-16:30',unit:'醫學系',topic:'醫事法律(1)',teacher:'王志嘉',duty:'X'},
+  {date:'2026-08-20',place:'第3演講廳',audience:'醫六',time:'15:00-15:50',unit:'整型外科',topic:'燒燙傷緊急處理',teacher:'喬浩禹',duty:'郁棻'},
+  {date:'2026-08-20',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'心臟內科',topic:'4. 心血管系統的檢查',teacher:'鄭書孟',duty:'任翔'},
+  {date:'2026-08-20',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'胸腔內科',topic:'3. 呼吸系統的檢查',teacher:'孟繁俊',duty:'任翔'},
+  {date:'2026-08-27',place:'第一演講廳',audience:'醫五',time:'14:20~14:50',unit:null,topic:'核心測驗第1次筆試',teacher:null,duty:'琇文'},
+  {date:'2026-08-27',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'婦產部',topic:'病史詢問',teacher:'黃莊彥',duty:null},
+  {date:'2026-08-27',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:null,topic:'病史詢問前測(紙本)',teacher:null,duty:null},
+  {date:'2026-08-27',place:'第3演講廳',audience:'醫六',time:'15:00-16:00',unit:'婦產部',topic:'下腹疼痛/陰道分泌物',teacher:'陳宇軒',duty:'文心'},
+  {date:'2026-08-27',place:'第3演講廳',audience:'醫六',time:'16:00-17:00',unit:'婦產部',topic:'月經異常/停經症候群',teacher:'董翔鈞',duty:'文心'},
+  {date:'2026-09-02',place:'OSCE',audience:'醫五',time:'全天',unit:'教學部',topic:'開立醫囑考試',teacher:'教學部',duty:'詳細梯次另行公告'},
+  {date:'2026-09-03',place:null,audience:'全體',time:'停課',unit:null,topic:'停課：九三軍人節',teacher:null,duty:null},
+  {date:'2026-09-10',place:'第3演講廳',audience:'醫六',time:'15:00-16:00',unit:'小兒部',topic:'幼兒虐待/兒童營養',teacher:'王德勳',duty:'文心'},
+  {date:'2026-09-10',place:'第3演講廳',audience:'醫六',time:'16:00-17:00',unit:'小兒部',topic:'預防保健',teacher:'游家祥',duty:'文心'},
+  {date:'2026-09-10',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'眼科部',topic:'9. 眼睛的檢查',teacher:'李榮基',duty:'慶銓'},
+  {date:'2026-09-10',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'耳鼻喉部',topic:'10. 耳朵的檢查、12. 咽喉的檢查',teacher:'邱逢翔',duty:'慶銓'},
+  {date:'2026-09-17',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'風濕免疫科',topic:'風濕免疫科國考複習課程',teacher:'裘喻翔',duty:'慶銓'},
+  {date:'2026-09-17',place:'第一演講廳',audience:'醫五',time:'14:20~14:50',unit:null,topic:'核心測驗第2次筆試',teacher:null,duty:null},
+  {date:'2026-09-17',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'耳鼻喉部',topic:'11. 頸部及甲狀腺的檢查',teacher:'邱逢翔',duty:'郁棻'},
+  {date:'2026-09-17',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'一般外科',topic:'13. 乳房檢查',teacher:'馮安捷',duty:'郁棻'},
+  {date:'2026-09-24',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'感染科',topic:'感染科國考複習課程',teacher:'吳瑞欣',duty:'宛君'},
+  {date:'2026-09-24',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'胃腸科',topic:'14. 腹部的檢查',teacher:'廖昶虹',duty:'申喬'},
+  {date:'2026-09-24',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'泌尿外科',topic:'15. 腹股溝的檢查、男性生殖系統',teacher:'顏維晨',duty:'申喬'},
+  {date:'2026-10-01',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'神經科部',topic:'5. 神經系統Ｉ的檢查(中樞神經)',teacher:'蔡佳霖',duty:'任翔'},
+  {date:'2026-10-01',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'復健醫學部',topic:'5. 神經系統ＩＩ的檢查(周邊神經)',teacher:'蘇聿圻',duty:'任翔'},
+  {date:'2026-10-08',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'腎臟內科',topic:'腎臟內科國考複習課程',teacher:'魏光宇',duty:'任翔'},
+  {date:'2026-10-08',place:'第一演講廳',audience:'醫五',time:'14:20~14:50',unit:null,topic:'核心測驗第3次筆試',teacher:null,duty:null},
+  {date:'2026-10-08',place:'第一演講廳',audience:'醫五',time:'15:00-17:00',unit:'教學部',topic:'考前練習',teacher:'教學部',duty:'X'},
+  {date:'2026-10-12',place:'OSCE',audience:'醫五',time:'全天',unit:'教學部',topic:'開立醫囑考試(補考)',teacher:'教學部',duty:'詳細梯次另行公告'},
+  {date:'2026-10-14',place:'OSCE',audience:'醫五',time:'全天',unit:'教學部',topic:'PE工作坊測驗',teacher:'教學部',duty:'10/14-10/15+10/19-10/20'},
+  {date:'2026-10-15',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'新陳代謝科',topic:'新陳代謝科國考複習課程',teacher:'蘇聖強',duty:'雅彤'},
+  {date:'2026-10-22',place:'第一演講廳',audience:'醫五',time:'15:00-16:30',unit:'醫學系',topic:'醫事法律(2)',teacher:'王志嘉',duty:'X'},
+  {date:'2026-10-29',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'胸腔內科',topic:'胸腔內科國考複習課程',teacher:'梁碩文',duty:'郁棻'},
+  {date:'2026-10-29',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'教學部',topic:'政策宣導與溝通',teacher:'教學部',duty:'X'},
+  {date:'2026-10-29',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'家庭醫學部',topic:'功能狀態的評量',teacher:'趙圓平',duty:'申喬'},
+  {date:'2026-11-05',place:'致德堂',audience:'醫五',time:'15:00-16:30',unit:'醫學系',topic:'醫事法律(3)',teacher:'王志嘉',duty:'X'},
+  {date:'2026-11-05',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'血液腫瘤科',topic:'血液腫瘤科國考複習課程',teacher:'李序麟',duty:'慶銓'},
+  {date:'2026-11-12',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'心臟內科',topic:'心臟內科國考複習課程',teacher:'蔡維哲',duty:'任翔'},
+  {date:'2026-11-12',place:'第一演講廳',audience:'醫五',time:'14:20~14:50',unit:null,topic:'核心測驗第4次筆試',teacher:null,duty:null},
+  {date:'2026-11-12',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'急診部',topic:'氣管內管插管',teacher:'方琬甯',duty:'宛君'},
+  {date:'2026-11-12',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'教學部/醫學系',topic:'六年級選科說明',teacher:'教學部',duty:'X'},
+  {date:'2026-11-17',place:'OSCE',audience:'醫五',time:'全天',unit:'教學部',topic:'PE工作坊測驗(補考)',teacher:'教學部',duty:'X'},
+  {date:'2026-11-19',place:null,audience:null,time:null,unit:null,topic:'TIMMF（活動內容依課表原文標示，簡報未說明，詳情請洽教學部）',teacher:null,duty:null},
+  {date:'2026-11-20',place:'OSCE',audience:'醫五',time:'全天',unit:'教學部',topic:'病史詢問後測',teacher:'教學部',duty:'詳細梯次另行公告'},
+  {date:'2026-11-26',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'胃腸科',topic:'胃腸科國考複習課程',teacher:'廖昶虹',duty:'雅彤'},
+  {date:'2026-11-26',place:'第一演講廳',audience:'醫五',time:'15:00-16:30',unit:'醫學系',topic:'醫事法律(4)',teacher:'王志嘉',duty:'X'},
+  {date:'2026-12-03',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'心臟外科',topic:'心臟外科國考複習課程',teacher:'張瑞宗',duty:'申喬'},
+  {date:'2026-12-03',place:'第一演講廳',audience:'醫五',time:'14:20~14:50',unit:null,topic:'核心測驗第5次筆試',teacher:null,duty:null},
+  {date:'2026-12-03',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'一般外科',topic:'傷口的換藥及包紮',teacher:'李定穎',duty:'宛君'},
+  {date:'2026-12-03',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'整形外科',topic:'傷口的縫合',teacher:'翁御哲(需協助發函)',duty:'宛君'},
+  {date:'2026-12-10',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'泌尿外科',topic:'泌尿外科國考複習課程',teacher:'顏維晨',duty:'郁棻'},
+  {date:'2026-12-10',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'心臟內科',topic:'基礎心電圖的判讀',teacher:'劉文正',duty:'慶銓'},
+  {date:'2026-12-10',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'泌尿外科',topic:'導尿管的插入',teacher:'江佩璋',duty:'慶銓'},
+  {date:'2026-12-17',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'胸腔外科',topic:'胸腔外科國考複習課程',teacher:'吳悌暉',duty:'慶銓'},
+  {date:'2026-12-17',place:'第一演講廳',audience:'醫五',time:'15:00-17:00',unit:'教學部',topic:'考前自主練習',teacher:'教學部',duty:'X'},
+  {date:'2026-12-24',place:'OSCE',audience:'醫五',time:'全天',unit:'教學部',topic:'臨床技能(OSCE)工作坊測驗',teacher:'教學部',duty:'12/18(五)-12/24(四)；詳細梯次另行公告'},
+  {date:'2026-12-31',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'大腸直腸外科',topic:'手術後照護',teacher:'游鈞偉',duty:'郁棻'},
+  {date:'2026-12-31',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'感染科',topic:'抗生素I',teacher:'許智堯',duty:'郁棻'},
+  {date:'2027-01-07',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'小兒外科',topic:'小兒外國考複習課程',teacher:'鄭詠升',duty:'宛君'},
+  {date:'2027-01-07',place:'第一演講廳',audience:'醫五',time:'14:20~14:50',unit:null,topic:'核心測驗第6次筆試',teacher:null,duty:null},
+  {date:'2027-01-07',place:'第一演講廳',audience:'醫五',time:'15:00-16:30',unit:'醫學系',topic:'醫事法律(5)',teacher:'王志嘉',duty:'X'},
+  {date:'2027-01-14',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'大腸直腸外科',topic:'大腸直腸外國考複習課程',teacher:'游鈞偉',duty:'任翔'},
+  {date:'2027-01-14',place:'第一演講廳',audience:'醫五',time:'14:20~14:50',unit:null,topic:'混成學習護照1th 檢查',teacher:null,duty:null},
+  {date:'2027-01-14',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'放射診斷部',topic:'基本影像判讀I(影像判讀)',teacher:'廖威誠',duty:'申喬'},
+  {date:'2027-01-14',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'放射診斷部',topic:'基本影像判讀II(臨床實務)',teacher:'鄭雲聲',duty:'申喬'},
+  {date:'2027-01-21',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'整型外科',topic:'整形外科國考複習課程',teacher:'何裕民',duty:'雅彤'},
+  {date:'2027-01-21',place:'第一演講廳',audience:'醫五',time:'14:20~14:50',unit:null,topic:'核心測驗第7次筆試',teacher:null,duty:null},
+  {date:'2027-01-21',place:'第一演講廳',audience:'醫五',time:'15:00-16:30',unit:'醫學系',topic:'醫事法律(6)',teacher:'王志嘉',duty:'X'},
+  {date:'2027-01-26',place:'OSCE',audience:'醫五',time:'全天',unit:'教學部',topic:'臨床技能(OSCE)工作坊測驗(補考)',teacher:'教學部',duty:'X'},
+  {date:'2027-01-28',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'一般外科',topic:'一般外科國考複習課程',teacher:'伍希元',duty:'申喬'},
+  {date:'2027-01-28',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'心臟外科',topic:'休克(低血容)',teacher:'黃偉哲',duty:'任翔'},
+  {date:'2027-01-28',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'胃腸科',topic:'噁心嘔吐/腹痛',teacher:'廖昶虹',duty:'任翔'},
+  {date:'2027-02-04',place:null,audience:'全體',time:'停課',unit:null,topic:'停課：春節',teacher:null,duty:null},
+  {date:'2027-02-11',place:'第一演講廳',audience:'醫五',time:'14:20~14:50',unit:null,topic:'核心測驗第8次筆試',teacher:null,duty:null},
+  {date:'2027-02-11',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'感染科',topic:'抗生素II',teacher:'黃瑞昌',duty:'宛君'},
+  {date:'2027-02-11',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'麻醉部',topic:'疼痛評估與處置',teacher:'曾偉誠',duty:'宛君'},
+  {date:'2027-02-18',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'神經外科部',topic:'神經外科國考複習課程',teacher:'待安排',duty:'郁棻'},
+  {date:'2027-02-18',place:'第一演講廳',audience:'醫五',time:'15:00-16:30',unit:'醫學系',topic:'醫事法律(7)',teacher:'王志嘉',duty:'X'},
+  {date:'2027-02-25',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'骨科部',topic:'骨科國考複習課程',teacher:'黃則普',duty:'文心'},
+  {date:'2027-02-25',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'神經科部',topic:'意識障礙/認知功能異常',teacher:'王承恩',duty:'慶銓'},
+  {date:'2027-02-25',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'臨床病理科',topic:'檢驗醫囑開立及報告查詢',teacher:'顏瓊姿',duty:'慶銓'},
+  {date:'2027-03-04',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'婦產部',topic:'婦產國考複習課程',teacher:'黃莊彥',duty:'慶銓'},
+  {date:'2027-03-04',place:'第一演講廳',audience:'醫五',time:'14:20~14:50',unit:null,topic:'核心測驗第9次筆試',teacher:null,duty:null},
+  {date:'2027-03-04',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'心臟內科',topic:'胸痛/心衰竭',teacher:'劉文正',duty:'郁棻'},
+  {date:'2027-03-04',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'腎臟內科',topic:'電解質/酸鹼異常',teacher:'陳璽之',duty:'郁棻'},
+  {date:'2027-03-11',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'小兒部',topic:'小兒國考複習課程',teacher:'方泓翔',duty:'雅彤'},
+  {date:'2027-03-11',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'皮膚部',topic:'紅疹(純線上課程)',teacher:'洪誌聰',duty:'申喬'},
+  {date:'2027-03-11',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'一般外科',topic:'一般外科腹部急症',teacher:'徐國峯',duty:'申喬'},
+  {date:'2027-03-18',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'眼科部',topic:'眼科國考複習課程',teacher:'謝筠修',duty:'任翔'},
+  {date:'2027-03-18',place:'第一演講廳',audience:'醫五',time:'14:20~14:50',unit:null,topic:'核心測驗第10次筆試',teacher:null,duty:null},
+  {date:'2027-03-18',place:'第一演講廳',audience:'醫五',time:'15:00-16:30',unit:'醫學系',topic:'醫事法律(8)',teacher:'王志嘉',duty:'X'},
+  {date:'2027-03-25',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'耳鼻喉部',topic:'耳鼻喉科國考複習課程',teacher:'上官瑋娟',duty:'文心'},
+  {date:'2027-03-25',place:'第一演講廳',audience:'醫五',time:'14:20~14:50',unit:null,topic:'混成學習護照2th 檢查',teacher:null,duty:null},
+  {date:'2027-03-25',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'新陳代謝科',topic:'高低血糖',teacher:'蘇聖強',duty:'任翔'},
+  {date:'2027-03-25',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'急診部',topic:'呼吸道處置',teacher:'方琬甯',duty:'任翔'},
+  {date:'2027-04-01',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'皮膚部',topic:'皮膚國考複習課程',teacher:'劉禧齡',duty:'申喬'},
+  {date:'2027-04-01',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'精神醫學部',topic:'精神狀態的檢查及意識狀態的評量',teacher:'黃郁絜',duty:'宛君'},
+  {date:'2027-04-01',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'臨床病理科',topic:'輸血的處理',teacher:'黎嘉君',duty:'宛君'},
+  {date:'2027-04-08',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'神經科部',topic:'神經內科國考複習課程',teacher:'吳維庭',duty:'郁棻'},
+  {date:'2027-04-08',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'營養部',topic:'病人飲食',teacher:'王秀惠',duty:'慶銓'},
+  {date:'2027-04-08',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'臨床藥學部',topic:'臨床藥物使用',teacher:'張櫻蘋',duty:'慶銓'},
+  {date:'2027-04-15',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'家庭醫學部',topic:'家庭醫學科國考複習課程',teacher:'林育任',duty:'申喬'},
+  {date:'2027-04-15',place:'第一演講廳',audience:'醫五',time:'14:20~14:50',unit:null,topic:'核心測驗第11次筆試',teacher:null,duty:null},
+  {date:'2027-04-15',place:'第一演講廳',audience:'醫五',time:'15:00-16:30',unit:'醫學系',topic:'醫事法律(9)',teacher:'王志嘉',duty:'X'},
+  {date:'2027-04-22',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'麻醉部',topic:'麻醉科國考複習課程',teacher:'黃貽暄',duty:'郁棻'},
+  {date:'2027-04-22',place:'第一演講廳',audience:'醫五',time:'15:00-17:00',unit:null,topic:'CBME-綜合測驗',teacher:'教學部',duty:'X'},
+  {date:'2027-04-29',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'精神醫學部',topic:'精神醫學國考複習課程',teacher:'陳琬亭',duty:'雅彤'},
+  {date:'2027-04-29',place:'第一演講廳',audience:'醫五',time:'15:00-16:00',unit:'血液腫瘤科',topic:'安寧照護',teacher:'程敏琪',duty:'任翔'},
+  {date:'2027-04-29',place:'第一演講廳',audience:'醫五',time:'16:00-17:00',unit:'課程預備時段',topic:'課程預備時段/六年級職前說明',teacher:'教學部',duty:'X'},
+  {date:'2027-05-06',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'放射診斷部',topic:'放射診斷國考複習課程',teacher:'陶菀婷',duty:'申喬'},
+  {date:'2027-05-13',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'急診部',topic:'急診國考複習課程',teacher:'周宜萱',duty:'郁棻'},
+  {date:'2027-05-20',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'放射腫瘤部',topic:'放射腫瘤國考複習課程',teacher:'陳信延',duty:'慶銓'},
+  {date:'2027-05-27',place:'第3演講廳',audience:'醫六',time:'15:00-16:30',unit:'復健部',topic:'復健科國考複習課程',teacher:'陳明澤',duty:'文心'},
+];
+
+/* ---------------- 輔助函式 ---------------- */
+var $ = function(sel, ctx){ return (ctx||document).querySelector(sel); };
+var $$ = function(sel, ctx){ return Array.prototype.slice.call((ctx||document).querySelectorAll(sel)); };
+
+function esc(s){
+  var div = document.createElement('div');
+  div.textContent = s==null ? '' : String(s);
+  return div.innerHTML;
+}
+
+function parseDate(str){
+  if(!str) return null;
+  var d = new Date(str+'T00:00:00');
+  return isNaN(d.getTime()) ? null : d;
+}
+
+var WEEKDAY_LABELS = ['日','一','二','三','四','五','六'];
+
+/* ---------------- 課表篩選與渲染 ---------------- */
+var SCHEDULE_FILTERS = [
+  {key:'醫五', label:'醫五'},
+  {key:'醫六', label:'醫六'},
+  {key:'all', label:'全部（含醫六／停課）'}
+];
+var currentScheduleFilter = '醫五';
+var currentScheduleSearch = '';
+
+function renderScheduleChips(){
+  var wrap = $('#scheduleChips');
+  wrap.innerHTML = '';
+  SCHEDULE_FILTERS.forEach(function(c){
+    var b = document.createElement('button');
+    b.className = 'chip' + (c.key===currentScheduleFilter?' active':'');
+    b.textContent = c.label;
+    b.type='button';
+    b.setAttribute('aria-pressed', c.key===currentScheduleFilter ? 'true':'false');
+    b.addEventListener('click', function(){
+      currentScheduleFilter = c.key;
+      renderScheduleChips();
+      renderSchedule();
+    });
+    wrap.appendChild(b);
+  });
+}
+
+function scheduleRowMatches(row){
+  var okAudience = currentScheduleFilter==='all' || row.audience===currentScheduleFilter || row.audience==='全體' || (currentScheduleFilter==='醫五' && row.audience==null);
+  var q = currentScheduleSearch.trim().toLowerCase();
+  var hay = [row.date,row.unit,row.topic,row.teacher,row.place,row.time].filter(Boolean).join(' ').toLowerCase();
+  var okSearch = !q || hay.indexOf(q)!==-1;
+  return okAudience && okSearch;
+}
+
+function fmtScheduleDate(dateStr){
+  var d = parseDate(dateStr);
+  if(!d) return dateStr;
+  return dateStr + '（週' + WEEKDAY_LABELS[d.getDay()] + '）';
+}
+
+function renderSchedule(){
+  var wrap = $('#scheduleList');
+  var list = SCHEDULE.filter(scheduleRowMatches);
+  $('#scheduleResultCount').textContent = '共找到 '+list.length+' 筆課程紀錄（全表共 '+SCHEDULE.length+' 筆）';
+  wrap.innerHTML = '';
+  if(!list.length){
+    wrap.innerHTML = '<p class="sched-empty">沒有符合條件的課程，試試清除搜尋或切換篩選。</p>';
+    return;
+  }
+  var groups = [];
+  var groupMap = {};
+  list.forEach(function(row){
+    var key = row.date || '（日期未標明）';
+    if(!groupMap[key]){ groupMap[key] = []; groups.push(key); }
+    groupMap[key].push(row);
+  });
+  groups.forEach(function(dateKey){
+    var rows = groupMap[dateKey];
+    var card = document.createElement('div');
+    card.className = 'sched-day';
+    var rowsHtml = rows.map(function(r){
+      if(r.time==='停課'){
+        return '<tr class="sched-holiday"><td colspan="5">'+esc(r.topic)+'</td></tr>';
+      }
+      var badge = r.audience==='醫五' ? '<span class="sched-badge med5">醫五</span>'
+        : r.audience==='醫六' ? '<span class="sched-badge med6">醫六</span>'
+        : r.audience==='全體' ? '<span class="sched-badge all">全體</span>' : '';
+      return '<tr>'+
+        '<td class="sched-time">'+esc(r.time)+'</td>'+
+        '<td>'+badge+'</td>'+
+        '<td>'+esc(r.unit)+'</td>'+
+        '<td>'+esc(r.topic)+(r.teacher?'（'+esc(r.teacher)+'）':'')+'</td>'+
+        '<td>'+esc(r.place)+'</td>'+
+      '</tr>';
+    }).join('');
+    card.innerHTML =
+      '<div class="sched-day-head"><span class="sched-date">'+esc(fmtScheduleDate(dateKey))+'</span></div>'+
+      '<table class="sched-table"><thead><tr><th>時間</th><th>對象</th><th>科部／單位</th><th>主題（教師）</th><th>地點</th></tr></thead>'+
+      '<tbody>'+rowsHtml+'</tbody></table>';
+    wrap.appendChild(card);
+  });
+}
+
+function init(){
+  renderScheduleChips();
+  renderSchedule();
+
+  var scheduleSearch = $('#scheduleSearch');
+  scheduleSearch.addEventListener('input', function(){
+    currentScheduleSearch = scheduleSearch.value;
+    renderSchedule();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
